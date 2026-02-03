@@ -35,6 +35,10 @@
             border-radius: 5px;
             font-size: 16px;
             margin: 10px;
+            transition: background 0.3s;
+        }
+        .download-btn:hover {
+            background: #2980b9;
         }
         .team-section { margin: 30px 0; }
         .team-member { 
@@ -46,14 +50,16 @@
         .contact-form { margin: 30px 0; }
         .form-group { margin: 15px 0; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input, textarea { 
+        input, textarea, select { 
             width: 100%; 
             padding: 8px; 
             border: 1px solid #ddd; 
             border-radius: 4px; 
             font-family: inherit;
+            box-sizing: border-box;
         }
-        textarea { height: 80px; }
+        textarea { height: 80px; resize: vertical; }
+        select { appearance: none; background: white; }
         .submit-btn {
             background: #27ae60;
             color: white;
@@ -62,6 +68,12 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            transition: background 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background: #219a52;
         }
         .note { 
             background: #fff3cd; 
@@ -102,6 +114,24 @@
             padding: 10px;
             margin: 10px 0;
         }
+        .developer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .developer-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .footer-info {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+        .footer-info p {
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
@@ -114,15 +144,15 @@
             <h2>📦 永久下载地址</h2>
             <p>腾讯微云永久链接，随时下载</p>
             
-            <a href="https://share.weiyun.com/1NL5mLCZ">
+            <a href="https://share.weiyun.com/kRrWjGCI" class="download-btn">
                 点击下载完整安装包
                 <span class="permanent-badge">永久有效</span>
             </a>
             
             <div class="note">
                 <strong>下载信息：</strong><br>
-                • 文件格式：压缩包 (133MB)<br>
-                • 包含内容：系统.exe + 浏览器.exe + 所有依赖文件<br>
+                • 文件格式：压缩包 (188MB)<br>
+                • 包含内容：系统.exe + 浏览器.exe + 二进制转换器 + API AI + 所有依赖文件<br>
                 • 安装说明：下载后解压，运行安装程序即可<br>
                 • 链接特性：<strong>永久有效，不会过期</strong>
             </div>
@@ -132,10 +162,14 @@
         <div class="team-section">
             <h2>👥 关于开发者</h2>
             <div class="team-member">
-                <strong>谢一挚，谢泽鑫 ，汤笑语，
-李田一，
-黄子恒</strong>
-                <p>📧 联系邮箱：3977025814@qq.com，2868533367@qq.com,3259958357@qq.com</p>
+                <strong>开发团队成员：</strong>
+                <ul class="developer-list">
+                    <li>谢一挚 📧 3977025814@qq.com</li>
+                    <li>谢泽鑫 📧 2868533367@qq.com</li>
+                    <li>汤笑语 📧 3259958357@qq.com</li>
+                    <li>李田一</li>
+                    <li>黄子恒</li>
+                </ul>
             </div>
             
             <div class="team-member">
@@ -167,6 +201,19 @@
                 </div>
                 
                 <div class="form-group">
+                    <label for="role">希望参与的项目部分：</label>
+                    <select id="role" name="role">
+                        <option value="">请选择</option>
+                        <option value="前端开发">前端开发 (HTML/CSS/JavaScript)</option>
+                        <option value="后端开发">后端开发 (Python/C++)</option>
+                        <option value="全栈开发">全栈开发</option>
+                        <option value="UI设计">UI设计</option>
+                        <option value="测试">测试</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
                     <label for="skills">你会什么编程语言/技能：</label>
                     <textarea id="skills" name="skills" placeholder="例如：Python, C++, HTML, JavaScript..."></textarea>
                 </div>
@@ -195,11 +242,11 @@
             </div>
         </div>
         
-        <div style="text-align: center; margin-top: 30px; color: #7f8c8d;">
-            <p>© 2025 谢一挚，谢泽鑫 ，汤笑语,
-李田一，
-黄子恒 - 桌面模拟器项目</p>
-            <p> 邮箱：3977025814@qq.com，3259958357@qq.com,2868533367@qq.com | QQ：3977025814 ,3259958357,2868533367| 永久下载：https://share.weiyun.com/FBJ2zC9T</p>
+        <div class="footer-info">
+            <p>© 2025 桌面模拟器项目团队</p>
+            <p>📧 联系邮箱：3977025814@qq.com, 2868533367@qq.com, 3259958357@qq.com</p>
+            <p>💬 QQ：3977025814, 3259958357, 2868533367</p>
+            <p>🔗 永久下载：https://share.weiyun.com/kRrWjGCI</p>
         </div>
     </div>
 
@@ -208,6 +255,7 @@
             const name = document.getElementById('name').value;
             const contact = document.getElementById('contact').value;
             const grade = document.getElementById('grade').value;
+            const role = document.getElementById('role').value;
             const skills = document.getElementById('skills').value;
             const message = document.getElementById('message').value;
             
@@ -222,6 +270,7 @@
                 '姓名：' + name + '\n' +
                 '联系方式：' + contact + '\n' +
                 '年级/学校：' + grade + '\n' +
+                '希望参与的部分：' + role + '\n' +
                 '编程技能：' + skills + '\n' +
                 '留言：' + message + '\n\n' +
                 '发送时间：' + new Date().toLocaleString() + '\n\n' +
@@ -250,7 +299,18 @@
                 selection.removeAllRanges();
                 selection.addRange(range);
             }, 100);
+            
+            // 平滑滚动到邮件内容区域
+            emailContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
+        
+        // 添加表单验证和回车键提交支持
+        document.getElementById('joinForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                generateEmail();
+            }
+        });
     </script>
 </body>
 </html>
